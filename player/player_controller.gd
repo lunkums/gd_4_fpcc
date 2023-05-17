@@ -2,19 +2,19 @@ extends CharacterBody3D
 class_name PlayerController
 # Handles responses to player input by applying movement and triggering interactions with the game world.
 
-const MAX_SPEED := 10
-const MOVE_ACCEL := 4.5
-const MOVE_DEACCEL := 16.0  # TODO: Rename or give description here
-const MAX_SLOPE_ANGLE := deg_to_rad(40.0)
-const MAX_CAMERA_X_DEGREE := 70.0
-const FLOOR_SNAP_LENGTH := .2
-const MIN_FLOOR_Y_VELOCITY := -0.5
+const MAX_SPEED: float = 10
+const MOVE_ACCEL: float = 4.5
+const MOVE_DEACCEL: float = 16.0  # TODO: Rename or give description here
+const MAX_SLOPE_ANGLE: float = deg_to_rad(40.0)
+const MAX_CAMERA_X_DEGREE: float = 70.0
+const FLOOR_SNAP_LENGTH: float = 0.2
+const MIN_FLOOR_Y_VELOCITY: float = -0.5
 
-var mouse_look_sensitivity := 0.1
-var joy_look_sensitivity := 2.0
-var force_capture_mouse_motion := false
-var _turn_amount := 0.0  # TODO: This is re-initialized every tick - delete if possible
-var _camera_turned_this_update := false  # TODO: can we eliminate this state?
+var mouse_look_sensitivity: float = 0.1
+var joy_look_sensitivity: float = 2.0
+var force_capture_mouse_motion: bool = false
+var _turn_amount: float = 0.0  # TODO: This is re-initialized every tick - delete if possible
+var _camera_turned_this_update: bool = false  # TODO: can we eliminate this state?
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var _camera: Camera3D = $RotationHelper/Camera3D
@@ -22,13 +22,11 @@ var _camera_turned_this_update := false  # TODO: can we eliminate this state?
 @onready var _rotation_helper: Node3D = $RotationHelper
 @onready var _input_direction: InputDirection = $InputDirection
 
-
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event: InputEvent) -> void:
 	if can_capture_mouse_motion() and event is InputEventMouseMotion:
 		_turn_camera(-(event as InputEventMouseMotion).relative * self.mouse_look_sensitivity)
 
-
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var input_move_vector := self._input_direction.get_move_direction()
 	var camera_rotation := -self._input_direction.get_look_direction() * joy_look_sensitivity
 
@@ -54,18 +52,14 @@ func _physics_process(delta: float):
 		_turn_amount = 0
 	_camera_turned_this_update = false
 
-
 func get_rotation_helper_x_rotation() -> float:
 	return self._rotation_helper.rotation_degrees.x
-
 
 func get_input_direction() -> InputDirection:
 	return self._input_direction
 
-
 func can_capture_mouse_motion() -> bool:
 	return true if self.force_capture_mouse_motion else Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-
 
 # Calculates and applies velocity to physics body based on input, returning the new velocity.
 # TODO: "calculates AND applies" - the calculating can be made fully static, move the applying elsewhere
@@ -96,11 +90,9 @@ func _process_velocity(delta: float, new_velocity: Vector3, input_direction: Vec
 
 	move_and_slide()
 
-
 # Basis vectors are already normalized.
 static func _get_walk_direction(camera_transform: Transform3D, input_direction: Vector2) -> Vector3:
 	return (-camera_transform.basis.z * -input_direction.y) + (camera_transform.basis.x * input_direction.x)
-
 
 # Turns the player's Y rotation by `amount.y`, and the camera's X rotation by `amount.x`.
 # X rotation is clamped by `MAX_CAMERA_X_DEGREE`.
