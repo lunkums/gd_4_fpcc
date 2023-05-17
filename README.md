@@ -1,9 +1,9 @@
-# gd_fpcc
+# gd_4_fpcc
 ![Godot Version](https://img.shields.io/badge/godot-v4.0-blue)
 [![License](https://img.shields.io/github/license/Lunkums/gd_4_fpcc)](https://github.com/Lunkums/gd_4_fpcc/blob/main/LICENSE.txt)
-[![Test](https://github.com/Lunkums/gd_4_fpcc/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/Lunkums/gd_4_fpcc/actions/workflows/test.yml)
+Test (TODO)
 
-[Play demo in browser! (TODO)]()
+Play demo in browser! (TODO)
 
 First person character controller for Godot Engine 4.x
 
