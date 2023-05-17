@@ -1,232 +1,211 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=3 uid="uid://brvmyd0btt8mt"]
 
-[ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://map/test_interact-box.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://p1uwm1safm8c" path="res://player/player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://map/test_interact-box.tscn" id="2"]
+[ext_resource type="Environment" uid="uid://cgs1yt561n1kn" path="res://map/env.tres" id="3_f6j4h"]
 
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 1, 10, 3 )
+[sub_resource type="BoxMesh" id="2"]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.5, 5, 1.5 )
+[sub_resource type="BoxShape3D" id="BoxShape3D_ec1xb"]
 
-[sub_resource type="SphereMesh" id=3]
+[sub_resource type="BoxShape3D" id="1"]
 
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 0.0980392, 0.796078, 0.32549, 1 )
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3t8aj"]
+albedo_color = Color(0.0980392, 0.796078, 0.32549, 1)
 metallic = 1.0
 roughness = 0.26
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="SphereMesh" id="3"]
+material = SubResource("StandardMaterial3D_3t8aj")
+
+[sub_resource type="Animation" id="4"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
+"values": [Vector3(1, 1, 1)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("InteractBox:is_active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 resource_name = "on_interact"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.2, 1.2, 1.2 ), Vector3( 0.5, 0.5, 0.5 ), Vector3( 1, 1, 1 ) ]
+"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(0.5, 0.5, 0.5), Vector3(1, 1, 1)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("InteractBox:is_active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 
-[node name="Spatial" type="Spatial"]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-
-[node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-calculate_tangents = false
-use_collision = true
-width = 10.0
-depth = 10.0
-
-[node name="CSGBox2" type="CSGBox" parent="CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, -3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="CSGBox3" type="CSGBox" parent="CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, -3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="CSGBox4" type="CSGBox" parent="CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, 3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="CSGBox5" type="CSGBox" parent="CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, 3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -10 )
-calculate_tangents = false
-use_collision = true
-width = 10.0
-depth = 10.0
-
-[node name="CSGBox2" type="CSGBox" parent="CSGBox2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, -3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="CSGBox3" type="CSGBox" parent="CSGBox2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, -3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="CSGBox4" type="CSGBox" parent="CSGBox2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, 3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="Ramp1" type="MeshInstance" parent="CSGBox2"]
-transform = Transform( 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, -3.95, 1.45348, -0.277801 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="CSGBox2/Ramp1"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CSGBox2/Ramp1/StaticBody"]
-transform = Transform( 1, -3.3094e-15, 0, -3.3094e-15, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="Ramp2" type="MeshInstance" parent="CSGBox2"]
-transform = Transform( -0.866025, 0.5, 8.74228e-08, 0.5, 0.866025, 0, -7.57103e-08, 4.37114e-08, -1, 3.95, 1.453, -0.278 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="CSGBox2/Ramp2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CSGBox2/Ramp2/StaticBody"]
-transform = Transform( 1, -3.3094e-15, 0, -3.3094e-15, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="CSGBox5" type="CSGBox" parent="CSGBox2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, 3.95 )
-calculate_tangents = false
-use_collision = true
-width = 1.0
-height = 4.0
-depth = 1.0
-
-[node name="RampPositionOn1" type="Position3D" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.79951, 3.0069, -10.1565 )
-__meta__ = {
-"_editor_description_": "Position reference for testing"
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gm0vt"]
+_data = {
+"RESET": SubResource("4"),
+"on_interact": SubResource("5")
 }
 
-[node name="RampPositionPre1" type="Position3D" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.45394, 0.18696, -10.1565 )
-__meta__ = {
-"_editor_description_": "Position reference for testing"
-}
+[node name="Node3D" type="Node3D"]
 
-[node name="RampPositionPre2" type="Position3D" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.73832, 0.187, -10.157 )
-__meta__ = {
-"_editor_description_": "Position reference for testing"
-}
+[node name="Player" parent="." instance=ExtResource("1")]
 
-[node name="RampPositionOn2" type="Position3D" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.31318, 4.27351, -10.157 )
-__meta__ = {
-"_editor_description_": "Position reference for testing"
-}
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+calculate_tangents = false
+use_collision = true
+size = Vector3(10, 2, 10)
 
-[node name="ExampleInteractable" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98184, 1.58952, 0 )
+[node name="CSGBox2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, -3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
 
-[node name="InteractBox" parent="ExampleInteractable" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+[node name="CSGBox3" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, -3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
 
-[node name="MeshInstance" type="MeshInstance" parent="ExampleInteractable"]
-mesh = SubResource( 3 )
-material/0 = SubResource( 6 )
+[node name="CSGBox4" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, 3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
+
+[node name="CSGBox5" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, 3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
+
+[node name="CSGBox2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -10)
+calculate_tangents = false
+use_collision = true
+size = Vector3(10, 2, 10)
+
+[node name="CSGBox2" type="CSGBox3D" parent="CSGBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, -3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
+
+[node name="CSGBox3" type="CSGBox3D" parent="CSGBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, -3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
+
+[node name="CSGBox4" type="CSGBox3D" parent="CSGBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 3.1, 3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
+
+[node name="Ramp1" type="MeshInstance3D" parent="CSGBox2"]
+transform = Transform3D(0.5, -8.66025, 0, 0.866025, 5, 0, 0, 0, 3, -3.95, 1.45348, -0.277801)
+mesh = SubResource("2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox2/Ramp1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox2/Ramp1/StaticBody3D"]
+transform = Transform3D(1, -3.3094e-15, 0, -3.3094e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ec1xb")
+
+[node name="Ramp2" type="MeshInstance3D" parent="CSGBox2"]
+transform = Transform3D(-0.866025, 5, 4.52987e-07, 0.5, 8.66025, 5.32907e-14, -1.30766e-07, 7.5498e-07, -3, 3.95, 1.453, -0.278)
+mesh = SubResource("2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox2/Ramp2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox2/Ramp2/StaticBody3D"]
+transform = Transform3D(1, -3.3094e-15, 0, -3.3094e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("1")
+
+[node name="CSGBox5" type="CSGBox3D" parent="CSGBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 3.1, 3.95)
+calculate_tangents = false
+use_collision = true
+size = Vector3(1, 4, 1)
+
+[node name="RampPositionOn1" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.79951, 3.0069, -10.1565)
+
+[node name="RampPositionPre1" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.45394, 0.18696, -10.1565)
+
+[node name="RampPositionPre2" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.73832, 0.187, -10.157)
+
+[node name="RampPositionOn2" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.31318, 4.27351, -10.157)
+
+[node name="ExampleInteractable" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3.98184, 1.58952, 0)
+
+[node name="InteractBox" parent="ExampleInteractable" instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExampleInteractable"]
+mesh = SubResource("3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ExampleInteractable"]
-anims/RESET = SubResource( 4 )
-anims/on_interact = SubResource( 5 )
+libraries = {
+"": SubResource("AnimationLibrary_gm0vt")
+}
 
 [node name="InteractLabel" type="Label" parent="."]
 visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-rect_scale = Vector2( 2.5, 2.5 )
-rect_pivot_offset = Vector2( 12, 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_as_outline = 1
+scale = Vector2(2.5, 2.5)
+pivot_offset = Vector2(12, 7)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
 text = "Use"
-align = 1
 
-[connection signal="interactable_hovered_changed" from="Player/RotationHelper/InteractRaycast" to="InteractLabel" method="set_visible"]
-[connection signal="interacted_with" from="ExampleInteractable/InteractBox" to="ExampleInteractable/AnimationPlayer" method="play" binds= [ "on_interact" ]]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_f6j4h")
 
-[editable path="Player"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.8699, 0.493228, 0, -0.493228, -0.8699, 0, 5.93721, 0)
+
+[connection signal="interacted_with" from="ExampleInteractable/InteractBox" to="ExampleInteractable/AnimationPlayer" method="play" binds= ["on_interact"]]

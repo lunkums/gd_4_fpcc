@@ -1,11 +1,11 @@
-extends RayCast
+extends RayCast3D
 
 signal interacted
 signal interactable_hovered_changed(new_hovered)
 
 const InteractBox := preload("interact_box.gd")
 
-export var _interact_input_action := "interact"
+@export var _interact_input_action := "interact"
 
 var _previously_hovered_interactable: InteractBox
 
@@ -17,7 +17,7 @@ func _ready():
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed(self._interact_input_action):
 		emit_signal("interacted")
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 
 func _physics_process(_delta: float):
@@ -26,11 +26,11 @@ func _physics_process(_delta: float):
 	if hovered_interactable != self._previously_hovered_interactable:
 		var was_previously_hovering_interactable := self._previously_hovered_interactable != null
 		if was_previously_hovering_interactable:
-			disconnect("interacted", self._previously_hovered_interactable, "on_interacted_with")
+			disconnect("interacted", Callable(self._previously_hovered_interactable, "on_interacted_with"))
 
 		var is_hovering_interactable := hovered_interactable != null
 		if is_hovering_interactable:
-			connect("interacted", hovered_interactable, "on_interacted_with")
+			connect("interacted", Callable(hovered_interactable, "on_interacted_with"))
 
 		emit_signal("interactable_hovered_changed", is_hovering_interactable)
 		# print("[DEBUG] is_hovering_interactable=%s" % is_hovering_interactable)

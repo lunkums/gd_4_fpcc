@@ -1,11 +1,11 @@
-extends Area
+extends Area3D
 
 signal interacted_with
 
-export var is_active := true setget set_is_active
-export var one_shot := false
+@export var is_active := true: set = set_is_active
+@export var one_shot := false
 
-onready var _active_collision_layer_bit := collision_layer
+@onready var _active_collision_layer_bit := collision_layer
 
 
 func _on_ready():

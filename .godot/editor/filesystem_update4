@@ -1,0 +1,8 @@
+res://default_env.tres
+res://map/test-map.tscn
+res://player/player_controller.gd
+res://map/env.tres
+res://player/player.tscn
+res://player/camera_viewbob.gd
+res://player/input_axis.gd
+res://player/input_direction.gd

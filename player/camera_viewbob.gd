@@ -1,4 +1,5 @@
-extends Spatial
+extends Node3D
+class_name CameraViewbob
 # Calculates and applies camera viewbob, based on input from the player's character controller.
 # This is all visual and feel-based, so not really a good candidate for unit testing
 
@@ -20,7 +21,7 @@ var _camera_bob_weight := 0.0
 func update_transform(delta: float, is_walking: bool, turn_amount: float, strafe_direction: float):
 	self._camera_bob_weight = self._camera_bob_weight + delta if is_walking else 0.0
 
-	var target_transform := _get_target_transform(
+	var target_transform := CameraViewbob._get_target_transform(
 		_camera_bob_weight,
 		turn_amount,
 		strafe_direction,
@@ -40,15 +41,14 @@ static func _get_target_transform(
 	p_y_bob_amount: float,
 	p_turn_roll_amount: float,
 	p_strafe_roll_amount: float
-) -> Transform:
-	var target_camera_offset := Transform.IDENTITY
-	var y_bob := Transform.IDENTITY.translated(
+) -> Transform3D:
+	var y_bob := Transform3D.IDENTITY.translated(
 		Vector3.DOWN * sin(-bob_weight * CAMERA_BOB_SPEED) * CAMERA_BOB_DISTANCE * p_y_bob_amount
 	)
-	var turn_roll := Transform.IDENTITY.rotated(
+	var turn_roll := Transform3D.IDENTITY.rotated(
 		Vector3.BACK, turn_amount * CAMERA_ROLL_TURN_DISTANCE * p_turn_roll_amount
 	)
-	var strafe_roll := Transform.IDENTITY.rotated(
+	var strafe_roll := Transform3D.IDENTITY.rotated(
 		Vector3.FORWARD, strafe_direction * CAMERA_ROLL_STRAFE_DISTANCE * p_strafe_roll_amount
 	)
 

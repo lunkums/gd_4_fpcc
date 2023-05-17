@@ -16,9 +16,9 @@ func test_can_interact():
 
 
 func test_can_hover_interactable():
-	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instance())
+	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instantiate())
 	watch_signals(interact_raycast)
-	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instance())
+	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instantiate())
 	interact_raycast.force_raycast_update()
 	simulate(interact_raycast, 1, 1.0)
 	assert_signal_emitted_with_parameters(interact_raycast, "interactable_hovered_changed", [true])
@@ -26,9 +26,9 @@ func test_can_hover_interactable():
 
 func test_can_stop_hovering_interactable():
 	# WITH an InteractRaycast that's hovering an InteractBox
-	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instance())
+	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instantiate())
 	watch_signals(interact_raycast)
-	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instance())
+	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instantiate())
 	interact_raycast.force_raycast_update()
 	simulate(interact_raycast, 1, 1.0)
 
@@ -43,9 +43,9 @@ func test_can_stop_hovering_interactable():
 
 
 func test_hovering_interactable_connects_interact_signal():
-	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instance())
+	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instantiate())
 	watch_signals(interact_raycast)
-	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instance())
+	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instantiate())
 	interact_raycast.force_raycast_update()
 	simulate(interact_raycast, 1, 1.0)
 	assert_connected(interact_raycast, interact_box, "interacted")
@@ -53,9 +53,9 @@ func test_hovering_interactable_connects_interact_signal():
 
 func test_unhovering_interactable_disconnects_interact_signal():
 	# WITH an InteractRaycast that's hovering an InteractBox
-	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instance())
+	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instantiate())
 	watch_signals(interact_raycast)
-	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instance())
+	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instantiate())
 	interact_raycast.force_raycast_update()
 	simulate(interact_raycast, 1, 1.0)
 
@@ -70,9 +70,9 @@ func test_unhovering_interactable_disconnects_interact_signal():
 
 
 func test_deactivating_interact_box_unhovers():
-	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instance())
+	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instantiate())
 	watch_signals(interact_raycast)
-	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instance())
+	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instantiate())
 	interact_raycast.force_raycast_update()
 	simulate(interact_raycast, 1, 1.0)
 
@@ -84,9 +84,9 @@ func test_deactivating_interact_box_unhovers():
 
 
 func test_activating_interact_box_hovers():
-	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instance())
+	var interact_raycast: InteractRaycast = add_child_autofree(INTERACT_RAYCAST_SCENE.instantiate())
 	watch_signals(interact_raycast)
-	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instance())
+	var interact_box: InteractBox = add_child_autofree(TEST_INTERACT_BOX_SCENE.instantiate())
 	interact_box.is_active = false
 	interact_raycast.force_raycast_update()
 	simulate(interact_raycast, 1, 1.0)

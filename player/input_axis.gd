@@ -4,12 +4,12 @@ extends Node
 const AXIS_LENGTH_MIN := -1
 const AXIS_LENGTH_MAX := 1
 
-export var _up_action := "ui_up"
-export var _down_action := "ui_down"
-export var _left_action := "ui_left"
-export var _right_action := "ui_right"
+@export var _up_action := "ui_up"
+@export var _down_action := "ui_down"
+@export var _left_action := "ui_left"
+@export var _right_action := "ui_right"
 
-var fake_direction setget set_fake_direction  # nullable Vector2
+var fake_direction : set = set_fake_direction
 var _up := 0.0
 var _down := 0.0
 var _left := 0.0
@@ -36,7 +36,7 @@ func get_raw_direction() -> Vector2:
 	)
 
 
-# Sets `fake_direction` to `direction` if `direction` is a `Vector2`, otherwise `null` 
+# Sets `fake_direction` to `direction` if `direction` is a `Vector2`, otherwise `null`
 func set_fake_direction(direction):
 	fake_direction = (
 		Vector2(

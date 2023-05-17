@@ -1,34 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://p1uwm1safm8c"]
 
-[ext_resource path="res://player/player_controller.gd" type="Script" id=1]
-[ext_resource path="res://player/mouse_grabber.gd" type="Script" id=2]
-[ext_resource path="res://player/input_direction.tscn" type="PackedScene" id=3]
-[ext_resource path="res://player/interact_raycast.tscn" type="PackedScene" id=4]
-[ext_resource path="res://player/camera_viewbob.gd" type="Script" id=9]
+[ext_resource type="Script" path="res://player/player_controller.gd" id="1"]
+[ext_resource type="Script" path="res://player/mouse_grabber.gd" id="2"]
+[ext_resource type="PackedScene" path="res://player/input_direction.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://player/interact_raycast.tscn" id="4"]
+[ext_resource type="Script" path="res://player/camera_viewbob.gd" id="9"]
 
-[sub_resource type="CapsuleShape" id=1]
-radius = 0.7
-height = 1.5
+[sub_resource type="CapsuleShape3D" id="1"]
+height = 1.77
 
-[node name="Player" type="KinematicBody" groups=["player"]]
-script = ExtResource( 1 )
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1")
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0 )
-shape = SubResource( 1 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885, 0)
+shape = SubResource("1")
 
-[node name="RotationHelper" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+[node name="RotationHelper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63, 0)
 
-[node name="Camera" type="Camera" parent="RotationHelper"]
+[node name="Camera3D" type="Camera3D" parent="RotationHelper"]
 cull_mask = 1048573
 current = true
 fov = 90.0
-script = ExtResource( 9 )
+script = ExtResource("9")
 
-[node name="InteractRaycast" parent="RotationHelper" instance=ExtResource( 4 )]
+[node name="InteractRaycast" parent="RotationHelper" instance=ExtResource("4")]
 
 [node name="MouseGrabber" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="InputDirection" parent="." instance=ExtResource( 3 )]
+[node name="InputDirection" parent="." instance=ExtResource("3")]

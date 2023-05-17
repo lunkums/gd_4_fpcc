@@ -5,17 +5,17 @@ extends Node
 signal mouse_grabbed(is_grabbed)
 
 # The input action name to watch for triggering a release.
-export var _release_action_name := "ui_cancel"
+@export var _release_action_name := "ui_cancel"
 
 # Controls whether automatically grab focus on `_ready()`.
 # Typically, this is desired behavior.
-export var _should_grab_on_ready := true
+@export var _should_grab_on_ready := true
 
 # Forces mouse to be released when focus is lost.
 # Useful for triggering callbacks, such as automatically displaying a pause screen when the player alt-tabs.
-export var _should_stay_released_on_refocus := true
+@export var _should_stay_released_on_refocus := true
 
-var is_mouse_grabbed := false setget set_mouse_grabbed, get_mouse_grabbed
+var is_mouse_grabbed := false: get = get_mouse_grabbed, set = set_mouse_grabbed
 
 func _ready():
 	# setgets aren't called with onready
@@ -24,19 +24,19 @@ func _ready():
 
 
 func _notification(what: int):
-	var is_focus_lost := what == NOTIFICATION_WM_FOCUS_OUT
+	var is_focus_lost := what == NOTIFICATION_APPLICATION_FOCUS_OUT
 	if is_focus_lost and self._should_stay_released_on_refocus:
 		self.is_mouse_grabbed = false
 
 
 func _unhandled_input(_event: InputEvent):
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and not self.is_mouse_grabbed:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not self.is_mouse_grabbed:
 		self.is_mouse_grabbed = true
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 	elif Input.is_action_just_pressed(self._release_action_name) and self.is_mouse_grabbed:
 		self.is_mouse_grabbed = false
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 
 func set_mouse_grabbed(is_grabbed: bool):

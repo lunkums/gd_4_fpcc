@@ -15,7 +15,7 @@ func test_can_get_cardinal_look_direction(
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("LookJoy"))
 	input_sender.action_down(params[0])
 	assert_eq(input_direction.get_look_direction(), params[1])
@@ -31,7 +31,7 @@ func test_can_get_diagonal_look_direction(
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("LookJoy"))
 	input_sender.action_down(params[0])
 	input_sender.action_down(params[1])
@@ -48,7 +48,7 @@ func test_can_get_cardinal_move_direction_with_keyboard(
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("MoveKey"))
 	input_sender.action_down(params[0])
 	assert_eq(input_direction.get_move_direction(), params[1])
@@ -65,7 +65,7 @@ func test_can_get_cardinal_move_direction_with_joypad(
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("MoveJoy"))
 	input_sender.action_down(params[0])
 	assert_eq(input_direction.get_move_direction(), params[1])
@@ -81,7 +81,7 @@ func test_can_get_diagonal_move_direction_with_keyboard(
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("MoveKey"))
 	input_sender.action_down(params[0])
 	input_sender.action_down(params[1])
@@ -98,7 +98,7 @@ func test_can_get_diagonal_move_direction_with_joypad(
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("MoveJoy"))
 	input_sender.action_down(params[0])
 	input_sender.action_down(params[1])
@@ -115,7 +115,7 @@ func test_can_hold_both_joypad_and_keyboard_move_directions_without_a_speed_incr
 		]
 	)
 ):
-	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instance())
+	var input_direction: InputDirection = add_child_autofree(INPUT_DIRECTION_SCENE.instantiate())
 	var input_sender = InputSender.new(input_direction.get_node("MoveJoy"))
 	input_sender.add_receiver(input_direction.get_node("MoveKey"))
 	input_sender.action_down(params[0])
